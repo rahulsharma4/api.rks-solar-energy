@@ -63,9 +63,9 @@ const createQuotation = async (req, res) => {
 
     const ownerId = req.user.role === 'admin' ? req.user._id : req.user.owner;
 
-    // Generate AVP order ID
+    // Generate APL order ID
     const orderSeq = await getNextSequenceValue('order_counter');
-    const orderId = `AVP${orderSeq.toString().padStart(3, '0')}`;
+    const orderId = `APL${orderSeq.toString().padStart(3, '0')}`;
 
     const quotation = await Quotation.create({
       ...req.body,
@@ -76,7 +76,7 @@ const createQuotation = async (req, res) => {
       solarPanels: solarPanels || 'N/A',
       inverter: inverter || 'N/A',
       structureType: structureType || '',
-      offering: offering || 'Azad Volthut Power LLP',
+      offering: offering || 'Atmation Private Limited',
       gsmBased: gsmBased || 'No',
       cleaningFrequency: cleaningFrequency || 'NO',
       floorHeight: floorHeight || '',
