@@ -14,19 +14,19 @@ const createInvoice = async (req, res) => {
     // Generate Invoice Number (e.g. EG-2026-515)
     const year = new Date().getFullYear();
     const lastInvoice = await Invoice.findOne({
-        invoiceNo: new RegExp(`^(INV|EG|DEV|AVP|APL)-${year}-`)
+        invoiceNo: new RegExp(`^(INV|EG|DEV|AVP|APL|RKS)-${year}-`)
     }).sort({ invoiceNo: -1 });
 
     let nextNumber = 515;
     if (lastInvoice) {
         const lastNo = parseInt(lastInvoice.invoiceNo.split('-')[2]);
         if (lastInvoice.invoiceNo.startsWith('INV-')) {
-            nextNumber = lastNo + 502; // Transition to APL-2026-516
+            nextNumber = lastNo + 502; // Transition to RKS-2026-516
         } else {
             nextNumber = lastNo + 1;
         }
     }
-    const invoiceNo = `APL-${year}-${nextNumber}`;
+    const invoiceNo = `RKS-${year}-${nextNumber}`;
 
     // Calculations
     const isInclusive = isGstInclusive === true || isGstInclusive === 'true';

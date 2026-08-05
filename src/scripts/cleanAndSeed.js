@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const dns = require('dns');
+
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (e) {
+  // Ignore
+}
 const User = require('../models/userModel');
 const Contact = require('../models/contactModel');
 const Lead = require('../models/leadModel');
@@ -49,10 +56,10 @@ const cleanAndSeed = async () => {
     
     // Create new admin user
     const adminUser = new User({
-      name: process.env.ADMIN_NAME || 'Admin Atmation Private Limited',
-      email: process.env.ADMIN_EMAIL || 'info@atmationsolar.com',
-      phone: process.env.ADMIN_PHONE || '7581818205',
-      password: process.env.ADMIN_PASSWORD || 'Admin@atmation123', // Hashes automatically via userModel's pre-save middleware
+      name: process.env.ADMIN_NAME || 'Admin rks Solar Energy',
+      email: process.env.ADMIN_EMAIL || 'rkssolarenergybiaora@gmail.com',
+      phone: process.env.ADMIN_PHONE || '7773077772',
+      password: process.env.ADMIN_PASSWORD || 'Admin@rkssolar123', // Hashes automatically via userModel's pre-save middleware
       role: 'admin',
       status: 'active'
     });
@@ -63,7 +70,7 @@ const cleanAndSeed = async () => {
     console.log('==================================================');
     console.log(`Admin User : ${adminUser.name}`);
     console.log(`Email      : ${adminUser.email}`);
-    console.log(`Password   : ${process.env.ADMIN_PASSWORD || 'Admin@atmation123'}`);
+    console.log(`Password   : ${process.env.ADMIN_PASSWORD || 'Admin@rkssolar123'}`);
     console.log('Role:     admin');
     console.log('--------------------------------------------------');
     console.log('Database Reset & Clean Setup Completed Successfully.');

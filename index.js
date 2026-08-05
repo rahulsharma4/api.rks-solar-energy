@@ -55,7 +55,7 @@ app.post('/api/webhook', require('./src/controllers/contactController').handleWe
 
 
 app.get('/', (req, res) => {
-  res.send('Atmation Private Limited CRM API is running...');
+  res.send('rks Solar Energy CRM API is running...');
 });
 
 const PORT = process.env.PORT || 5000;

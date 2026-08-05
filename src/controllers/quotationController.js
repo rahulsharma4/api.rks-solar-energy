@@ -63,9 +63,9 @@ const createQuotation = async (req, res) => {
 
     const ownerId = req.user.role === 'admin' ? req.user._id : req.user.owner;
 
-    // Generate APL order ID
+    // Generate RKS order ID
     const orderSeq = await getNextSequenceValue('order_counter');
-    const orderId = `APL${orderSeq.toString().padStart(3, '0')}`;
+    const orderId = `RKS${orderSeq.toString().padStart(3, '0')}`;
 
     const quotation = await Quotation.create({
       ...req.body,
@@ -76,7 +76,7 @@ const createQuotation = async (req, res) => {
       solarPanels: solarPanels || 'N/A',
       inverter: inverter || 'N/A',
       structureType: structureType || '',
-      offering: offering || 'Atmation Private Limited',
+      offering: offering || 'rks Solar Energy',
       gsmBased: gsmBased || 'No',
       cleaningFrequency: cleaningFrequency || 'NO',
       floorHeight: floorHeight || '',
