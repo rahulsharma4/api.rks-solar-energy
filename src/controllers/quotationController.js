@@ -210,7 +210,7 @@ const updateQuotation = async (req, res) => {
     const {
       systemSize, solarPanels, inverter, structureType,
       offering, gsmBased, cleaningFrequency, floorHeight, inverterLocation,
-      inverterHybrid, battery, batteryRemark,
+      inverterHybrid, battery, batteryRemark, showTechnicalSpecs,
       baseAmount, earlyBirdDiscount, additionalDiscount, gstPercentage,
       centralSubsidy, stateSubsidy, terms, bankDetails, loanDetails, validUntil,
       isGstInclusive, billingName, pricingMode, customPrices
@@ -297,6 +297,7 @@ const updateQuotation = async (req, res) => {
     quotation.inverterHybrid = inverterHybrid || quotation.inverterHybrid;
     quotation.battery = battery || quotation.battery;
     quotation.batteryRemark = batteryRemark !== undefined ? batteryRemark : quotation.batteryRemark;
+    if (showTechnicalSpecs !== undefined) quotation.showTechnicalSpecs = showTechnicalSpecs;
 
     quotation.baseAmount = baseAmt;
     quotation.earlyBirdDiscount = earlyDisc;
