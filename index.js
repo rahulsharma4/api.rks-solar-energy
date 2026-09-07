@@ -43,6 +43,7 @@ app.use('/api/leads', require('./src/routes/leadRoutes'));
 app.use('/api/payments', require('./src/routes/paymentRoutes'));
 app.use('/api/dashboard', require('./src/routes/dashboardRoutes'));
 app.use('/api/quotations', require('./src/routes/quotationRoutes'));
+app.use('/api/solar-pumps/quotations', require('./src/routes/solarPumpQuotationRoutes'));
 app.use('/api/invoices', require('./src/routes/invoiceRoutes'));
 app.use('/api/notifications', require('./src/routes/notificationRoutes'));
 app.use('/api/contacts', require('./src/routes/contactRoutes'));

@@ -11,6 +11,10 @@ const invoiceSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Quotation',
     },
+    solarPumpQuotation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'SolarPumpQuotation',
+    },
     invoiceNo: {
       type: String,
       required: true,
@@ -20,10 +24,14 @@ const invoiceSchema = mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    // Same fields as quotation for data consistency
-    systemSize: { type: String, required: true },
-    solarPanels: { type: String, required: true },
-    inverter: { type: String, required: true },
+    // Same fields as quotation for data consistency (now optional to support both)
+    systemSize: { type: String },
+    solarPanels: { type: String },
+    inverter: { type: String },
+    
+    // Solar Pump specific fields
+    pumpCapacity: { type: String },
+    pumpBrand: { type: String },
     
     baseAmount: { type: Number, required: true },
     gstPercentage: { type: Number, default: 0 },

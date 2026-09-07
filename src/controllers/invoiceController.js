@@ -1,5 +1,6 @@
 const Invoice = require('../models/invoiceModel');
 const Quotation = require('../models/quotationModel');
+const SolarPumpQuotation = require('../models/solarPumpQuotationModel');
 
 // @desc    Create a new invoice (from scratch or quotation)
 // @route   POST /api/invoices
@@ -7,7 +8,8 @@ const Quotation = require('../models/quotationModel');
 const createInvoice = async (req, res) => {
   try {
     const { 
-      leadId, quotationId, systemSize, solarPanels, inverter,
+      leadId, quotationId, solarPumpQuotationId, systemSize, solarPanels, inverter,
+      pumpCapacity, pumpBrand,
       baseAmount, gstPercentage, amountPaid, bankDetails, isGstInclusive
     } = req.body;
 
@@ -58,10 +60,13 @@ const createInvoice = async (req, res) => {
     const invoice = await Invoice.create({
       lead: leadId,
       quotation: quotationId,
+      solarPumpQuotation: solarPumpQuotationId,
       invoiceNo,
       systemSize,
       solarPanels,
       inverter,
+      pumpCapacity,
+      pumpBrand,
       baseAmount: storedBaseAmount,
       gstPercentage: gstPerc,
       gstAmount,
@@ -78,6 +83,9 @@ const createInvoice = async (req, res) => {
     // If created from quotation, mark quotation as converted
     if (quotationId) {
       await Quotation.findByIdAndUpdate(quotationId, { status: 'Converted' });
+    }
+    if (solarPumpQuotationId) {
+      await SolarPumpQuotation.findByIdAndUpdate(solarPumpQuotationId, { status: 'Converted' });
     }
 
     res.status(201).json(invoice);
@@ -132,6 +140,9 @@ const deleteInvoice = async (req, res) => {
     // If quotation is linked, revert its status to Pending
     if (invoice.quotation) {
       await Quotation.findByIdAndUpdate(invoice.quotation, { status: 'Pending' });
+    }
+    if (invoice.solarPumpQuotation) {
+      await SolarPumpQuotation.findByIdAndUpdate(invoice.solarPumpQuotation, { status: 'Pending' });
     }
 
     await Invoice.findByIdAndDelete(req.params.id);
