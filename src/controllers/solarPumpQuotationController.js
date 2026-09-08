@@ -377,4 +377,23 @@ const updateEmiStatus = async (req, res) => {
   }
 };
 
-module.exports = { createQuotation, getQuotations, getQuotationById, updateQuotation, updateFulfillmentStatus, updateEmiStatus };
+// @desc    Delete a solar pump quotation
+// @route   DELETE /api/solar-pumps/quotations/:id
+// @access  Private (Admin only recommended)
+const deleteQuotation = async (req, res) => {
+  try {
+    const quotation = await SolarPumpQuotation.findById(req.params.id);
+    if (!quotation) {
+      return res.status(404).json({ message: 'Quotation not found' });
+    }
+    
+    // Check for linked invoices before deleting if necessary
+    // Assuming we just delete it directly for now as requested
+    await quotation.deleteOne();
+    res.json({ message: 'Quotation deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createQuotation, getQuotations, getQuotationById, updateQuotation, updateFulfillmentStatus, updateEmiStatus, deleteQuotation };
