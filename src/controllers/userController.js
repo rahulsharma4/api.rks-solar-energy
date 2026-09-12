@@ -230,7 +230,7 @@ const updateProfile = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const { email, password } = req.body;
+    const { email, password, companyDetails } = req.body;
 
     if (email) {
       const cleanEmail = email.toString().trim().toLowerCase();
@@ -246,6 +246,13 @@ const updateProfile = async (req, res) => {
     if (password && password.trim() !== '') {
       user.password = password.trim();
       user.tokenVersion = (user.tokenVersion || 0) + 1; // invalidate old tokens if needed
+    }
+
+    if (companyDetails) {
+      user.companyDetails = {
+        ...(user.companyDetails || {}),
+        ...companyDetails
+      };
     }
 
     await user.save();

@@ -50,6 +50,7 @@ const userSchema = mongoose.Schema(
       fbPageAccessToken: { type: String, default: '' },
       fbPageName: { type: String, default: '' },
       fbAccessToken: { type: String, default: '' },
+      globalTerms: { type: String, default: '' },
     },
   },
   {
