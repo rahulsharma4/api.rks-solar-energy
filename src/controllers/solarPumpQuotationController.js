@@ -193,7 +193,8 @@ const getQuotationById = async (req, res) => {
   try {
     const quotation = await SolarPumpQuotation.findById(req.params.id)
       .populate('lead', 'name email phone address paymentMode leadId')
-      .populate('createdBy', 'name');
+      .populate('createdBy', 'name')
+      .populate('owner', 'companyDetails');
 
     if (quotation) {
       res.json(quotation);
