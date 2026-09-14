@@ -101,6 +101,14 @@ const quotationSchema = mongoose.Schema(
     netEffectivePrice: { type: Number, required: true }, // (Net Price - Subsidies)
 
     terms: { type: String },
+    paymentSteps: [
+      {
+        num: { type: String },
+        pct: { type: String },
+        title: { type: String },
+        desc: { type: String }
+      }
+    ],
     bankDetails: {
       accountName: { type: String },
       accountNumber: { type: String },

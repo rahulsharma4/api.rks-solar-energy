@@ -51,6 +51,22 @@ const userSchema = mongoose.Schema(
       fbPageName: { type: String, default: '' },
       fbAccessToken: { type: String, default: '' },
       globalTerms: { type: String, default: '' },
+      globalPaymentSteps: [
+        {
+          num: { type: String },
+          pct: { type: String },
+          title: { type: String },
+          desc: { type: String },
+        }
+      ],
+      globalSolarPumpPaymentSteps: [
+        {
+          num: { type: String },
+          pct: { type: String },
+          title: { type: String },
+          desc: { type: String },
+        }
+      ],
     },
   },
   {

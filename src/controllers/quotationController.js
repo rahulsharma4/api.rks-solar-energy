@@ -98,6 +98,7 @@ const createQuotation = async (req, res) => {
       stateSubsidy: stateSub,
       netEffectivePrice: netEffectivePriceAmt,
       terms: terms || '',
+      paymentSteps: req.body.paymentSteps || [],
       bankDetails: bankDetails || {},
       loanDetails: loanDetails || {},
       validUntil: validUntil || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
@@ -315,6 +316,7 @@ const updateQuotation = async (req, res) => {
     quotation.netEffectivePrice = netEffectivePriceAmt;
     
     quotation.terms = terms || quotation.terms;
+    if (req.body.paymentSteps !== undefined) quotation.paymentSteps = req.body.paymentSteps;
     if (bankDetails) quotation.bankDetails = bankDetails;
     if (loanDetails) quotation.loanDetails = loanDetails;
     if (validUntil) quotation.validUntil = validUntil;
